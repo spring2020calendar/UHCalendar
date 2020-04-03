@@ -4,34 +4,71 @@
   <meta charset="UTF-8">
   <title>Calendar Event Files</title>
 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.css">
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script type="text/javascript"
+          src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.2/semantic.min.js"></script>
+  <script xmlns="http://www.w3.org/1999/xhtml" async=""
+          src="https://cdn.rawgit.com/eligrey/FileSaver.js/5ed507ef8aa53d8ecfea96d96bc7214cd2476fd2/FileSaver.min.js"></script>
+  <script src="fileScripts.js"></script>
+
 </head>
 <body>
 <div class="ui container">
-  <h1 class="ui header">Calendar Event Planner</h1>
+  <h1 class="ui header">Calendar Event File Planner</h1>
 </div>
-<h2 class="ui header">Fill out the following fields:</h2>
-<p class="required">* required</p>
 
-<form onsubmit="return false">
-  </br>
-  Day Name: <input type="text" id="summary" placeholder="*" required>
-  </br></br>
-  Location: <input type="text" id="location">
-  </br></br>
-  Start date: <input type="date" name="dateStart" id="dateStart" required>
-  </br></br>
-  Start Time: <input type="time" id="start-time" value="00:00" required>
-  </br></br>
-  End date: <input type="date" name="dateEnd" id="dateEnd" required>
-  </br></br>
-  End Time: <input type="time" id="end-time" value="00:00" required>
-  </br></br>
-  <h2>Download event file</h2>
-  <button class="ui button" type="submit" id="submit" onclick="submitForm()">
-    <i class="file outline icon"></i>Download
-  </button>
+    <h2 class="ui header">Fill out the following fields:</h2>
+    <p class="required">* required</p>
+    <button class="ui button" id="advanced" onclick="toggleAdvanced()">
+      Show Advanced
+    </button>
 
-</form>
+    <form onsubmit="return false">
+      <div class="advanced">
+        </br>
+        Version:
+        <select id="version" required>
+          <option value="2.0">2.0 (iCalendar)</option>
+          <option value="1.0">1.0 (vCalendar)</option>
+        </select>
+      </div>
+      </br>
+      Summary: <input type="text" id="summary" placeholder="*" required>
+      </br></br>
+      Location: <input type="text" id="location">
+      </br></br>
+      Start date: <input type="date" name="dateStart" id="dateStart" required>
+      </br></br>
+      Start Time: <input type="time" id="start-time" value="00:00" required>
+      </br></br>
+      End date: <input type="date" name="dateEnd" id="dateEnd" required>
+      </br></br>
+      End Time: <input type="time" id="end-time" value="00:00" required>
+      </br></br>
+      <div class="advanced">
+        Repeat:
+        <select id="repeat">
+          <option value="NONE">None</option>
+          <option value="HOURLY">Every Hour</option>
+          <option value="DAILY">Every Day</option>
+          <option value="WEEKLY">Every Week</option>
+          <option value="MONTHLY">Every Month</option>
+          <option value="YEARLY">Every Year</option>
+        </select>
+        &nbsp;&nbsp;&nbsp;
+        Number of repeats:
+        <input type="number" id="numRepeats" min="1" placeholder="infinite">
+        </br></br>
+
+      </div>
+      <h2>Download event file</h2>
+      <button class="ui button" type="submit" id="submit" onclick="submitForm()">
+        <i class="file outline icon"></i>Download
+      </button>
+
+    </form>
+
 
 </body>
 </html>
