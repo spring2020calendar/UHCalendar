@@ -45,28 +45,41 @@ function submitForm() {
   //verify end date/time is not before start date/time
   const start = document.getElementById("dateStart").value;
   const end = document.getElementById("dateEnd").value;
-  if (end > start) {
-    createFile();
+  const date2 = new Date();
+  const dt2 = createDate(date2);
+
+  if (start < dt2)  {
+    alert("Start date should not be a past date");
+    console.assert(start < dt2,'Invalid alert');
     return;
+  } else if (start == dt2) {
+    alert("Start date can't be today's date because today already started");
+    console.assert(start == dt2, 'Invalid alert');
   }
   else {
-    if (end == start) {
-      const startTime = document.getElementById("start-time").value;
-      const endTime = document.getElementById("end-time").value;
-      if (endTime >= startTime) {
-        createFile();
-        return;
-      }
-      else {
-        alert("Error: End time should not be before start time");
-        console.assert((end == start) && (endTime < startTime), 'Invalid alert');
-        return;
-      }
+    if (end > start) {
+      createFile();
+      return;
     }
     else {
-      alert("Error: End date should not be before start date");
-      console.assert(end < start, 'Invalid alert');
-      return;
+      if (end == start) {
+        const startTime = document.getElementById("start-time").value;
+        const endTime = document.getElementById("end-time").value;
+        if (endTime >= startTime) {
+          createFile();
+          return;
+        }
+        else {
+          alert("Error: End time should not be before start time");
+          console.assert((end == start) && (endTime < startTime), 'Invalid alert');
+          return;
+        }
+      }
+      else {
+        alert("Error: End date should not be before start date");
+        console.assert(end < start, 'Invalid alert');
+        return;
+      }
     }
   }
 }
